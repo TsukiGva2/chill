@@ -11,16 +11,57 @@ nop	----------------------
 nop 	 this will be ignored
 nop	----------------------
 nop	cool is 22;
-nop	totally ignored :)
+nop	say /cool%;
+nop	totally ignored XD
 
 num cool;
 nop	 cool is an integer now
+
+str cool;
+nop	 cool is a string now
+
+num cool;
+
+
+nop	 			   example code, this will return an error
+nop-----------------------------------|---------|---------|----------|--------------------------------------
+lol is 12;
+num lol;
+add cool, /lol%;
+str lol;
+add cool, /lol%;
+say /lol%;
+nop-----------------------------------|---------|---------|---------|---------------------------------------
+nop	    if you know why this returns an error then you are starting to understand the language
+
+
+
+
 
 say cool is /cool%;
 nop	 print value of cool
 
 add cool, 23;
 nop	 cool += 23
+
+sub cool, /cool%;
+sub cool, 1;
+add cool, 23;
+mul cool, 2;
+div cool, 6;
+
+nop_____________________________________________________________________________________
+num cool;
+nop ------------------------------------------------------------------------------------
+nop lets focus on that line, NUM turns the given variable to an INTEGER
+nop so, DIV may return a FLOATING POINT value, but we want a more readable INTEGER value
+nop so instead of something like 3.14 we would get 3
+nop-------------------------------------------------------------------------------------
+
+pow cool, 2;
+nop	 -----------------------------------------------------------------------------_
+nop	 we did some math! pow: power, mod: modulus, div: division, you got the idea...|
+nop	 -----------------------------------------------------------------------------_|
 
 say cool is /cool%;
 nop	 notice the reserved word inside the "say", this works fine even without double quotes
@@ -29,3 +70,25 @@ add cool, /cool%;
 nop	 var + var operation
 
 say cool is /cool%;
+
+nop	 ------------------------------------
+nop	 we will get a big number down here!
+nop	 ------------------------------------
+
+big is 1;
+num big;
+div big, 23;
+say /big%;
+
+nop _____________________________________________
+nop			NOTE
+nop ---------------------------------------------
+nop you know, all that stuff is just python
+nop so if you can do in python you can do it here
+nop ---------------------------------------------
+
+nop ________________________________________________________________
+nop				 THE END
+nop ----------------------------------------------------------------
+nop this is the end, more exemples will arive soon, thanks everyone!
+nop ----------------------------------------------------------------
