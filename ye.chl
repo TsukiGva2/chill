@@ -1,7 +1,31 @@
+say lowercase;
+nop      "say" prints something
+
+yell uppercase;
+nop	 "yell" prints something in uppercase
+
 cool is 34;
-yell cool is /cool% ye;
-cool is 22;
-add cool, 20;
-say cool is /cool% ye;
-yell lol;
-say lol;
+nop	 variable declaration
+
+nop	----------------------
+nop 	 this will be ignored
+nop	----------------------
+nop	cool is 22;
+nop	totally ignored :)
+
+num cool;
+nop	 cool is an integer now
+
+say cool is /cool%;
+nop	 print value of cool
+
+add cool, 23;
+nop	 cool += 23
+
+say cool is /cool%;
+nop	 notice the reserved word inside the "say", this works fine even without double quotes
+
+add cool, /cool%;
+nop	 var + var operation
+
+say cool is /cool%;
