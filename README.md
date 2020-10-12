@@ -1,2 +1,2 @@
 # chill
-Linguagem de programming em python
+"Programming language" project in python
