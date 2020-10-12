@@ -22,21 +22,15 @@ nop	 cool is a string now
 
 num cool;
 
+cl is 44;
 
-nop	 			   example code, this will return an error
-nop-----------------------------------|---------|---------|----------|--------------------------------------
-lol is 12;
-num lol;
-add cool, /lol%;
-str lol;
-add cool, /lol%;
-say /lol%;
-nop-----------------------------------|---------|---------|---------|---------------------------------------
-nop	    if you know why this returns an error then you are starting to understand the language
+maybe
+cl is 22;
+nop	---------------------------------------------------------------------
+nop	the "maybe" statement has a 50% chance of executing the line under it
+nop	---------------------------------------------------------------------
 
-
-
-
+say cl is /cl%;
 
 say cool is /cool%;
 nop	 print value of cool
@@ -79,6 +73,81 @@ big is 1;
 num big;
 div big, 23;
 say /big%;
+
+nop	 ------------------------------------
+nop	 now we will skip some code!
+nop	 ------------------------------------
+
+jump 90;
+
+nop __________
+
+say hello;
+
+nop ----------
+nop ignored :/
+nop ----------
+
+say not ignored :);
+nop	--------------------------------------------------------------------------
+nop	but yea, the lines thing can be a real mess
+nop	that's why we have MARKS, you can mark a part of your code, like a comment
+nop	but you can jump to it (at the moment you can only jump forward)
+nop	--------------------------------------------------------------------------
+
+jump &mark!;
+
+say ignored;
+
+&mark
+say hey there!;
+
+maybe
+jump &mark2!;
+nop	---------------------------------------------------------------------------------------
+nop	we can combine these with a "maybe" statement for executing some piece of code randomly
+nop	---------------------------------------------------------------------------------------
+
+say maybe this will be ignored :(;
+
+&mark2
+say this will not be ignored! :);
+
+cool is 10;
+pltx compared is 10;
+
+assuming cool equals /compared%;
+say hey;
+
+nop	____________________________________________________________
+nop	this is basically an if statement in chill
+nop	it ignores the line below it if the expression is False
+nop	you should mixture it with a jump
+nop	so if an expression is True it will jump to somewhere
+nop	instead of just not ignoring the line below
+nop	-------------------------------------------------------------
+
+compared is 5;
+
+assuming cool equals /compared%;
+say h;
+
+assuming cool not /compared%;
+jump &mark3!;
+
+say pls dont ignore me;
+
+&mark3
+say ignored again!;
+
+num cool;
+num compared;
+
+assuming cool > /compared%;
+say greater!;
+
+assuming cool < /compared%;
+say lower!;
 
 nop _____________________________________________
 nop			NOTE

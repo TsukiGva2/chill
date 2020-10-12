@@ -1,7 +1,5 @@
 import sys
 
-keepgoin = True
-
 def add_(operation, line):
     if(line[line.index(operation) + len(operation) + 1:line.index(",")] in programvars):
         if(ops[2] in line[line.index(operation) + len(operation) + 1:line.index(";")] and ops[3] in line[line.index(operation) + len(operation) + 1:line.index(";")]):
@@ -100,71 +98,24 @@ def pow_(operation, line):
             except TypeError:
                 print "\nError in expression POW, two arguments must be numbers!\ntry: num <var>; before using that expression\n" # put line number here
 
-def equ_(op,line):
-    global keepgoin
-    if line[line.index(keyw[3]) + len(keyw[3]) + 1:line.index(comp[0]) - 1] in programvars:
-        if("/" in line and "%" in line and line[line.index("/") + 1:line.index("%")] in programvars):
-            if(programvars[line[line.index(keyw[3]) + len(keyw[3]) + 1:line.index(comp[0]) - 1]] == programvars[line[line.index("/") + 1:line.index("%")]]):
-                flags["equality"] = True
-                flags["non-equality"] = False
-            else:
-                flags["non-equality"] = True
-                flags["equality"] = False
-                keepgoin = False
-def let_(op,line):
-    global keepgoin
-    if line[line.index(keyw[3]) + len(keyw[3]) + 1:line.index(comp[1]) - 1] in programvars:
-        if("/" in line and "%" in line and line[line.index("/") + 1:line.index("%")] in programvars):
-            if(programvars[line[line.index(keyw[3]) + len(keyw[3]) + 1:line.index(comp[1]) - 1]] < programvars[line[line.index("/") + 1:line.index("%")]]):
-                flags["equality"] = True
-                flags["non-equality"] = False
-            else:
-                flags["non-equality"] = True
-                flags["equality"] = False
-                keepgoin = False
-def grt_(op,line):
-    global keepgoin
-    if line[line.index(keyw[3]) + len(keyw[3]) + 1:line.index(comp[2]) - 1] in programvars:
-        if("/" in line and "%" in line and line[line.index("/") + 1:line.index("%")] in programvars):
-            if(programvars[line[line.index(keyw[3]) + len(keyw[3]) + 1:line.index(comp[2]) - 1]] > programvars[line[line.index("/") + 1:line.index("%")]]):
-                flags["equality"] = True
-                flags["non-equality"] = False
-            else:
-                flags["non-equality"] = True
-                flags["equality"] = False
-                keepgoin = False
-def not_(op,line):
-    global keepgoin
-    if line[line.index(keyw[3]) + len(keyw[3]) + 1:line.index(comp[3]) - 1] in programvars:
-        if("/" in line and "%" in line and line[line.index("/") + 1:line.index("%")] in programvars):
-            if not programvars[line[line.index(keyw[3]) + len(keyw[3]) + 1:line.index(comp[3]) - 1]] == programvars[line[line.index("/") + 1:line.index("%")]]:
-                flags["equality"] = True
-                flags["non-equality"] = False
-            else:
-                flags["non-equality"] = True
-                flags["equality"] = False
-                keepgoin = False
-
 args        = ["-f", "--file", "-i", "--interactive"]
-keyw        = ["yell", "say", "maybe", "assuming","jump"]
+keyw        = ["yell", "say", "maybe", "assuming"]
 ops         = ["num", "str", "/", "%"]
 aritm       = ["add", "sub", "is", "mul", "div", "mod", "pow"]
 comp        = ["equals", "<", ">", "not"]
-flags       = {"equality":False,"non-equality":False}
 code        = ""
-compmix     = {"equals":equ_,"<":let_,">":grt_,"not":not_}
+compmix     = {"equals":equ_,"<":}
 mathmix     = {"add":add_,"sub":sub_,"mul":mul_,"div":div_,"mod":mod_,"pow":pow_}
 reserved    = comp + aritm + ops + keyw
 programvars = {}
-ignore      = 0
+keepgoin    = True
 
 clargs  = sys.argv
 
 def dothings(thing):
-    global keepgoin, ignore
-    lines = thing.splitlines()
-    for linum, line in enumerate(lines):
-        if not line.startswith("nop") and keepgoin == True and ignore <= 0:
+    global keepgoin
+    for line in thing.splitlines():
+        if not line.startswith("nop") and keepgoin == True:
             try:
                 for kw in keyw:
                     if kw in line:
@@ -192,22 +143,8 @@ def dothings(thing):
                                 keepgoin = True
                             else:
                                 keepgoin = False
-                        elif(kw == keyw[3]):
-                            for cx in comp:
-                                if cx in line:
-                                    compmix[cx](cx,line)
-                        elif(kw == keyw[4]):
-                            if "&" in line and "!" in line:
-                                if line[line.index("&"):line.index("!")] in thing:
-                                    place = lines.index(line[line.index("&"):line.index("!")])
-                                    ignore = place - linum
-                                else:
-                                    print "\n" + str(thing)
-                                    print "\nmark not found!\n"
-                            else:
-                                place = int(line[line.index(keyw[4]) + len(keyw[4]) + 1:line.index(";")])
-                                if place <= len(lines):
-                                    ignore = place - linum
+                        elif(kw == keyw[2]):
+                            
                 for op in ops:
                     if op in line:
                         if(op == ops[0] and line[line.index(ops[0]) + len(ops[0]) + 1:line.index(";")] in programvars):
@@ -223,10 +160,9 @@ def dothings(thing):
                                 programvars[line[:line.index(aritm[2]) - 1]] = line[line.index(aritm[2]) + 3:line.index(";")]
                         else:
                             mathmix[at](at, line)
-            except TypeError:
+            except ValueError:
                 print "something went wrong here, remember to put a semicolon(;) in the end of lines"
         else:
-            ignore -= 1
             keepgoin = True
 
 
