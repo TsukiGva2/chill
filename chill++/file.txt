@@ -1,0 +1,5 @@
+say lowercase;
+yell uppercase;
+
+something is 10;
+num something;

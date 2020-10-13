@@ -15,6 +15,20 @@ int used = 0;
 char *keyw[5] = {"yell","say","maybe","assuming","jump"};
 char *aritm[8] = {"is","add","sub","mul","pow","div","num","mod"};
 
+int pow_(int base,int exp){
+	long long result = 1;
+	while(exp != 0){
+		result *= base;
+		--exp;
+	}
+}
+
+int cvrt(char cvrtd){
+	int byt;
+	byt = (int)cvrtd - 48 * (cvrtd <= '9' && cvrtd >= '0');
+	return(byt);
+}
+
 char *sbst(char *source,int spos,int epos){
 	char *sub;
 	char str[MAXL];
@@ -121,10 +135,37 @@ int dothings(char *ln,int lnum,int *ign,int *kgoin,char **varnames,char **values
 				int name = lookfor_var(varnames,sbst(ln,0,lookfor(aritm[0],slice)));
 				/* NUNCA FAÇA SUBSTRING EM UMA SUBSTRING */
 				if(name != -1){
-
+					
 				}
 				else {
-					
+					varnames[used] = malloc(MAXL);
+					strcpy(varnames[used],sbst(ln,0,lookfor("is",ln)));
+					values[used] = malloc(MAXL);
+					strcpy(values[used],sbst(ln,lookfor("is",ln) + 3,lookfor(";",ln)));
+					used += 1;
+				}
+			}
+			else if(aritm[l] == aritm[6]){
+				int index = lookfor_var(varnames,sbst(ln,lookfor("num",ln) + 4,lookfor(";",ln)));
+				if(index != -1){
+					/*int conv[strlen(values[index])];
+					for(int b = 0;b < strlen(values[index]);b++){
+						conv[b] = cvrt(values[index][b]);
+					}*/
+					int conv[4] = {1,2,3,4};
+					int arrlen = sizeof(conv) / 4;
+					printf("%d\n",arrlen);
+					int buf = 0;
+					for(int s = 0;s < arrlen;s++){
+						printf("conv=%d arrlen=%d s=%d arrlen - (s + 1)=%d\n",conv[s],arrlen,s,arrlen - (s + 1));
+						if(arrlen - (s + 1) != 0){
+							buf += conv[s] * pow_(10,arrlen - (s + 1));
+						}
+						else{
+							buf += conv[s];
+						}
+					}
+					printf("%d\n",buf);
 				}
 			}
 		}
