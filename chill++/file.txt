@@ -1,5 +1,5 @@
 say lowercase;
 yell uppercase;
 
-something is 10;
+something is 1234;
 num something;

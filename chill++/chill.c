@@ -148,16 +148,13 @@ int dothings(char *ln,int lnum,int *ign,int *kgoin,char **varnames,char **values
 			else if(aritm[l] == aritm[6]){
 				int index = lookfor_var(varnames,sbst(ln,lookfor("num",ln) + 4,lookfor(";",ln)));
 				if(index != -1){
-					/*int conv[strlen(values[index])];
+					int conv[strlen(values[index])];
 					for(int b = 0;b < strlen(values[index]);b++){
 						conv[b] = cvrt(values[index][b]);
-					}*/
-					int conv[4] = {1,2,3,4};
+					}
 					int arrlen = sizeof(conv) / 4;
-					printf("%d\n",arrlen);
 					int buf = 0;
 					for(int s = 0;s < arrlen;s++){
-						printf("conv=%d arrlen=%d s=%d arrlen - (s + 1)=%d\n",conv[s],arrlen,s,arrlen - (s + 1));
 						if(arrlen - (s + 1) != 0){
 							buf += conv[s] * pow_(10,arrlen - (s + 1));
 						}
