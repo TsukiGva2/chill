@@ -21,6 +21,7 @@ int pow_(int base,int exp){
 		result *= base;
 		--exp;
 	}
+	return(result);
 }
 
 int cvrt(char cvrtd){
@@ -109,7 +110,11 @@ int dothings(char *ln,int lnum,int *ign,int *kgoin,char **varnames,char **values
 	for(int i = 0;i < 5;i++){
 		if(lookfor(keyw[i],slice) != strlen(slice)){
 			if(keyw[i] == keyw[1]){
+				if(lookfor("/",ln) != strlen(ln) && lookfor("%",ln)){
+					
+				} else {
 				printf("%s\n",sbst(slice,lookfor(keyw[1],slice) + strlen(keyw[1]) + 1,strlen(slice)));
+				}
 			} 
 			else if(keyw[i] == keyw[0]){
 				char *tbprintd = sbst(slice,lookfor(keyw[0],slice) + strlen(keyw[0]) + 1,strlen(slice));
